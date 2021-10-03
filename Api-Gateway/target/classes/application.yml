@@ -1,0 +1,49 @@
+server:
+  port: 9001
+  
+spring:
+  application:
+    name: Api-Gateway
+    
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
+  
+
+  cloud:
+   gateway:
+      routes:
+      - id: Product-Service
+        uri: http://localhost:8093
+        predicates:
+        - Path=/api/**  
+      - id: Profile-Service
+        uri: http://localhost:8098
+        predicates:
+        - Path=/api/**
+      - id: Cart-Service
+        uri: http://localhost:8094
+        predicates:
+        - Path=/**
+      - id: Order-Service
+        uri: http://localhost:8095
+        predicates:
+        - Path=/*
+      - id: User-Service
+        uri: http://localhost:8097
+        predicates:
+        - Path=/api/**
+      - id: Profile-Service
+        uri: http://localhost:8098
+        predicates:
+        - Path=/api/**
+      
+      
+      
+      
+   
